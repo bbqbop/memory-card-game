@@ -1,30 +1,27 @@
 import './App.css';
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
+import dinoIcons from './_dinoIcons';
 import GameOverContext from './components/gameOverContext';
-require.context('./icons', false, /\.(png|jpe?g|svg)$/)
-
-function importAll(r) {
-  let images = {};
-   r.keys().forEach((item, index) => { images[index] = r(item); });
-  return images
- }
-const dinos = importAll(require.context('./icons', false, /\.(png|jpe?g|svg)$/));
-
-
+import Card from './components/Card';
+import WinScreen from './components/WinScreen';
 
 export const App = () => {
-  const [dinoSet, setDinoSet] = useState(createDinoSet(3))
-  const [order, setOrder] = useState([0,1,2])
+  const [level, setLevel] = useState(1);
+  const [highScore, setHighScore] = useState(0);
+  const [dinoSet, setDinoSet] = useState(createDinoSet(level));
+  const [order, setOrder] = useState([0,1,2]);
+  const [clickCount, setClickCount] = useState(0);
+  const [win, setWin] = useState(false);
   const [gameOver, setGameOver] = useState(false);
 
   function createDinoSet(num) {
     const set = [];
-    while(set.length < num){
-      const index = Math.floor(Math.random() * Object.keys(dinos).length) 
-      if(set.includes(dinos[index])){
+    while(set.length < num + 2){
+      const index = Math.floor(Math.random() * Object.keys(dinoIcons).length) 
+      if(set.includes(dinoIcons[index])){
         continue
       } else {
-        set.push(dinos[index])
+        set.push(dinoIcons[index])
       }
     }
     return set;
@@ -40,13 +37,37 @@ export const App = () => {
         indices.push(index);
       }
     }
+    setClickCount(prevCount => prevCount + 1);
     setOrder(indices);
+  }
+
+  useEffect(() => {
+    if (clickCount >= dinoSet.length){
+      setWin(true);
+      setHighScore(clickCount);
+      setClickCount(0);
+      setLevel(prev => prev + 1);
+    }
+  },[clickCount, dinoSet, level, highScore])
+
+  function startNextLevel(){
+    setDinoSet(createDinoSet(level));
+    setOrder(prevOrder => {
+      const array = [...prevOrder];
+      array.push(level + 1);
+      return array;
+    });
+    setWin(false)
   }
 
   return (
     <div> 
       <GameOverContext.Provider value={{ gameOver, setGameOver }}>
-        {gameOver ? <div>GAMEOVER</div> : 
+        {gameOver 
+          ? <div>GAMEOVER</div> 
+          : win
+          ? <WinScreen nextLevel={startNextLevel}/>
+          : 
           order.map(idx => (
            <Card src={dinoSet[idx]} shuffle={shuffledIndices} key={dinoSet.indexOf(dinoSet[idx])} />
          ))}
@@ -55,21 +76,8 @@ export const App = () => {
   )
 }
 
-function Card( {src, shuffle} ){
-  const [isClicked, setIsClicked] = useState(false);
-  const {setGameOver} = useContext(GameOverContext);
 
-  function handleClick(){
-    isClicked === false ? setIsClicked(true) : setGameOver(true);
-    shuffle();
-  }
 
-  return (
-    <div className="card">
-      <img src={src} onClick={handleClick} alt="Dino-Card"/>
-    </div>
-  )
 
-}
 
 
