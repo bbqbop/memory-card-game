@@ -1,22 +1,28 @@
 import './App.css';
 import React, { useState, useContext, useEffect } from 'react';
 import dinoIcons from './_dinoIcons';
-import GameOverContext from './components/gameOverContext';
+import GameContext from './_gameContext';
+import Logo from './components/Logo';
 import Card from './components/Card';
-import WinScreen from './components/WinScreen';
+import Score from './components/Score';
+import { WinScreen, GameOverScreen } from './components/Screens';
+import Footer from './components/Footer';
+
 
 export const App = () => {
   const [level, setLevel] = useState(1);
-  const [highScore, setHighScore] = useState(0);
-  const [dinoSet, setDinoSet] = useState(createDinoSet(level));
-  const [order, setOrder] = useState([0,1,2]);
   const [clickCount, setClickCount] = useState(0);
+  const [score, setScore] = useState(0);
+  const [highScore, setHighScore] = useState(0);
+  const [newHighScore, setNewHighscore] = useState(false);
+  const [dinoSet, setDinoSet] = useState(createDinoSet());
+  const [order, setOrder] = useState([0,1]);
   const [win, setWin] = useState(false);
   const [gameOver, setGameOver] = useState(false);
 
-  function createDinoSet(num) {
+  function createDinoSet(num = level + 1) {
     const set = [];
-    while(set.length < num + 2){
+    while(set.length < num){
       const index = Math.floor(Math.random() * Object.keys(dinoIcons).length) 
       if(set.includes(dinoIcons[index])){
         continue
@@ -37,42 +43,73 @@ export const App = () => {
         indices.push(index);
       }
     }
-    setClickCount(prevCount => prevCount + 1);
     setOrder(indices);
   }
 
   useEffect(() => {
-    if (clickCount >= dinoSet.length){
+      handleUpdate();
+  });
+
+  function handleUpdate(){
+    if (clickCount >= dinoSet.length) {
       setWin(true);
-      setHighScore(clickCount);
+      setScore(prev => prev + clickCount);
       setClickCount(0);
       setLevel(prev => prev + 1);
+    } else if (gameOver) {
+      const finalScore = score + clickCount;
+      if (finalScore >= highScore) {
+        setNewHighscore(true);
+        setHighScore(finalScore);
+      }
     }
-  },[clickCount, dinoSet, level, highScore])
+  }
 
-  function startNextLevel(){
-    setDinoSet(createDinoSet(level));
+  function triggerNextLevel(){
+    setDinoSet(createDinoSet());
     setOrder(prevOrder => {
       const array = [...prevOrder];
-      array.push(level + 1);
+      array.push(level);
       return array;
     });
     setWin(false)
+  };
+
+  function triggerRestart(){
+    setGameOver(false);
+    setNewHighscore(false);
+    setClickCount(0);
+    setScore(0);
+    setLevel(1);
+    setOrder([0,1]);
+    setDinoSet(createDinoSet(2));
+  }
+
+  function animateBody() {
+    const body = document.querySelector('.body');
+    body.classList.toggle('fadeout');
   }
 
   return (
-    <div> 
-      <GameOverContext.Provider value={{ gameOver, setGameOver }}>
-        {gameOver 
-          ? <div>GAMEOVER</div> 
-          : win
-          ? <WinScreen nextLevel={startNextLevel}/>
-          : 
-          order.map(idx => (
-           <Card src={dinoSet[idx]} shuffle={shuffledIndices} key={dinoSet.indexOf(dinoSet[idx])} />
-         ))}
-      </GameOverContext.Provider>
-    </div>
+    <> 
+    <div className='header'>
+        <Logo logo={dinoIcons[0]}/>
+        <Score currentScore = {score + clickCount} highScore = {highScore}/>
+      </div>
+      <div className='body'>
+        <GameContext.Provider value={{ setGameOver, setClickCount }}>
+          { gameOver 
+            ? <GameOverScreen restart={triggerRestart} newHighScore={newHighScore}/>
+            : win
+            ? <WinScreen nextLevel={triggerNextLevel}/>
+            : 
+            order.map(idx => (
+            <Card src={dinoSet[idx]} shuffle={shuffledIndices} key={dinoSet.indexOf(dinoSet[idx])} />
+          ))}
+        </GameContext.Provider>
+      </div>
+      <Footer />
+    </>
   )
 }
 
