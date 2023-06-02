@@ -1,0 +1,35 @@
+{
+  "files": {
+    "main.css": "/static/css/main.80d9decc.css",
+    "main.js": "/static/js/main.18118cba.js",
+    "static/js/787.079dd69e.chunk.js": "/static/js/787.079dd69e.chunk.js",
+    "static/media/016-dinosaur-15.png": "/static/media/016-dinosaur-15.aa6682d093d56673c08d.png",
+    "static/media/028-dinosaur-27.png": "/static/media/028-dinosaur-27.3ab819a7dbccc34301eb.png",
+    "static/media/006-dinosaur-5.png": "/static/media/006-dinosaur-5.093b7141a06f255612a6.png",
+    "static/media/035-dinosaur-34.png": "/static/media/035-dinosaur-34.66ebfe9063fd9efd1f78.png",
+    "static/media/010-dinosaur-9.png": "/static/media/010-dinosaur-9.8a0a49f8924b4b979de1.png",
+    "static/media/037-dinosaur-36.png": "/static/media/037-dinosaur-36.f2938a3669b36c7cb27c.png",
+    "static/media/002-dinosaur-1.png": "/static/media/002-dinosaur-1.3166b6756f0d1fc903dc.png",
+    "static/media/034-dinosaur-33.png": "/static/media/034-dinosaur-33.e71b5a4e6f20a6dfa6e2.png",
+    "static/media/042-dinosaur-41.png": "/static/media/042-dinosaur-41.d1d4b6fa1b7b2e7fd1d7.png",
+    "static/media/027-dinosaur-26.png": "/static/media/027-dinosaur-26.7c9da44963e8b76166ac.png",
+    "static/media/026-dinosaur-25.png": "/static/media/026-dinosaur-25.4b22958f9c59d8756adc.png",
+    "static/media/029-dinosaur-28.png": "/static/media/029-dinosaur-28.2fcf33fc9496a112f50c.png",
+    "static/media/044-dinosaur-43.png": "/static/media/044-dinosaur-43.397e7a304f7002b39947.png",
+    "static/media/022-dinosaur-21.png": "/static/media/022-dinosaur-21.58d1ef4f339e0e9a47fb.png",
+    "static/media/031-dinosaur-30.png": "/static/media/031-dinosaur-30.9904be98ff912658c766.png",
+    "static/media/019-dinosaur-18.png": "/static/media/019-dinosaur-18.fbcb7b35c4020335d5c9.png",
+    "static/media/030-dinosaur-29.png": "/static/media/030-dinosaur-29.918a1fa243a64dc62937.png",
+    "static/media/005-dinosaur-4.png": "/static/media/005-dinosaur-4.6ac8039422464aeb65c6.png",
+    "static/media/033-dinosaur-32.png": "/static/media/033-dinosaur-32.61685162a3887932b871.png",
+    "index.html": "/index.html",
+    "static/media/infoIcon.svg": "/static/media/infoIcon.a0c83ce211e130d6c56bf641354d05e1.svg",
+    "main.80d9decc.css.map": "/static/css/main.80d9decc.css.map",
+    "main.18118cba.js.map": "/static/js/main.18118cba.js.map",
+    "787.079dd69e.chunk.js.map": "/static/js/787.079dd69e.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.80d9decc.css",
+    "static/js/main.18118cba.js"
+  ]
+}
