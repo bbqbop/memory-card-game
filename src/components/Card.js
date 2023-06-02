@@ -1,4 +1,4 @@
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext } from "react";
 import GameContext from "../_gameContext";
 
 export default function Card( {src, shuffle} ){

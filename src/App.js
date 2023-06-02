@@ -1,5 +1,5 @@
 import './App.css';
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import dinoIcons from './_dinoIcons';
 import GameContext from './_gameContext';
 import Logo from './components/Logo';
@@ -83,11 +83,6 @@ export const App = () => {
     setLevel(1);
     setOrder([0,1]);
     setDinoSet(createDinoSet(2));
-  }
-
-  function animateBody() {
-    const body = document.querySelector('.body');
-    body.classList.toggle('fadeout');
   }
 
   return (
