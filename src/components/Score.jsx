@@ -1,5 +1,3 @@
-import React from "react";
-
 export default function Score ({currentScore, highScore}){
     return (
         <div className="score">

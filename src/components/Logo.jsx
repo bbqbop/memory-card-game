@@ -1,4 +1,3 @@
-import React from "react";
 import infoIcon from '../infoIcon.svg'
 
 export default function Logo({logo}){

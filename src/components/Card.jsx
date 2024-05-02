@@ -3,7 +3,7 @@ import GameContext from "../_gameContext";
 
 export default function Card( {src, shuffle} ){
     const [isClicked, setIsClicked] = useState(false);
-    const {setGameOver, setClickCount} = useContext(GameContext);
+    const {setGameOver, setClickCount, iconsUrl} = useContext(GameContext);
   
     async function handleClick(){
 
@@ -17,7 +17,7 @@ export default function Card( {src, shuffle} ){
   
     return (
       <div className="card">
-        <img src={src} onClick={handleClick} alt="Dino-Card"/>
+        <img src={`${iconsUrl}/${src}`} onClick={handleClick} alt="Dino-Card"/>
       </div>
     );
   }

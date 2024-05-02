@@ -13,12 +13,11 @@ It challenges players to test and improve their memory skills by clicking dinosa
 - Players can restart the game at any time to try again.
 
 ## Technologies Used
-- React: A JavaScript library for building user interfaces.
-- React Hooks: Allows you to use state and other React features without writing a class.
-- HTML5: The markup language used for structuring the game's UI.
-- CSS3: The styling language used for visual presentation and animations.
+- Initially written with Create React App, migrated to Vite and added Dino icon API in 2024
+- React & CSS for the Frontend of the game
+- NodeJs & Express for the Icon Api
 
 ## Credits
 Icons made by Freepik from www.flaticon.com
 
-dierkPeters 06/2023
+dierkPeters 06/2023 & 05/2024
